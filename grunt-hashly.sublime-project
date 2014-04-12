@@ -1,8 +1,5 @@
 {
-	"folders":
-	[
-		{
-			"path": "/C/dev/grunt-hashly"
-		}
-	]
+    "folders": [{
+        "path": "./"
+    }]
 }

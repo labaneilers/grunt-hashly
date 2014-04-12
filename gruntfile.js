@@ -53,6 +53,12 @@ module.exports = function (grunt) {
                     eol: "crlf"
                 }
             }
+        },
+        hashly: {
+            all: {
+                files: "./assets2/**/*",
+                basePath: "./assets2/"
+            }
         }
     };
 
@@ -64,6 +70,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-mocha-test");
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-lineending");
+
+    grunt.loadTasks("./tasks/");
 
     grunt.registerTask("travis", "default");
 
