@@ -6,7 +6,7 @@
         "node": ">=0.8.0"
     },
     "dependencies": {
-        "hashly": "~0.1.6"
+        "hashly": "~0.1.7"
     },
     "devDependencies": {
         "chai": "~1.9.1",
