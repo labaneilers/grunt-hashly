@@ -56,7 +56,6 @@ Optionally specify a comma-delimited list of globbing patterns to use to exclude
 This configuration will output all hashed files and the manifest in place.
 
 ```js
-// Project configuration.
 grunt.initConfig({
   hashly: {
     my_target: {
@@ -64,13 +63,13 @@ grunt.initConfig({
     }
   }
 });
+```
 
 #### Setting a targetPath
 
 This configuration will output all hashed files and the manifest in the specified target directory.
 
 ```js
-// Project configuration.
 grunt.initConfig({
   hashly: {
     my_target: {
@@ -79,13 +78,13 @@ grunt.initConfig({
     }
   }
 });
+```
 
 #### Setting the manifest format to 'tab'
 
 This configuration will output all hashed files and the manifest in place, with the manifest in tab-delimited format.
 
 ```js
-// Project configuration.
 grunt.initConfig({
   hashly: {
     my_target: {
@@ -97,12 +96,12 @@ grunt.initConfig({
   }
 });
 ```
+
 #### Setting an exclusion pattern
 
 This configuration will exclude any *.pdf files from being hashed.
 
 ```js
-// Project configuration.
 grunt.initConfig({
   hashly: {
     my_target: {
@@ -113,3 +112,4 @@ grunt.initConfig({
     }
   }
 });
+```
