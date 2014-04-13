@@ -5,25 +5,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON("package.json"),
         jshint: {
             uses_defaults: ["gruntfile.js", "./lib/**/*.js"],
-            with_overrides: {
-                options: {
-                    jshintrc: "test/.jshintrc"
-                },
-                files: {
-                    src: ["test/**/*.js"]
-                }
-            },
             options: {
                 jshintrc: ".jshintrc"
-            }
-        },
-        mochaTest: {
-            all: {
-                src: ["./test/**/*.unittests.js"]
-            },
-            options: {
-                reporter: "Spec",
-                timeout: 20000
             }
         },
         jsbeautifier: {
@@ -105,7 +88,6 @@ module.exports = function (grunt) {
 
     // NPM tasks
     grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-mocha-test");
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-lineending");
     grunt.loadNpmTasks("grunt-contrib-clean");
