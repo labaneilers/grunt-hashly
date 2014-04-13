@@ -68,6 +68,12 @@ module.exports = function (grunt) {
                 files: "./assets/**/*.js",
                 basePath: "./assets/"
             },
+            inPlaceManifestTab: {
+                basePath: "./assets/",
+                options: {
+                    manifestFormat: "tab"
+                }
+            },
             clean: {
                 basePath: "./assets/",
                 clean: true
@@ -79,7 +85,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            assetsDist: ["./assetsDist/"]
+            assetsDist: ["./assetsDist/"],
+            manifestTab: ["./assets/manifest.tab"]
         }
     };
 
@@ -142,6 +149,7 @@ module.exports = function (grunt) {
     grunt.registerTask("h-inPlaceExcludeJs", ["restoreWarning", "hashly:inPlaceExcludeJs", "verifyInPlace", "hashly:clean"]);
     grunt.registerTask("h-inPlaceIncludeCss", ["restoreWarning", "hashly:inPlaceIncludeCss", "verifyInPlace", "hashly:clean"]);
     grunt.registerTask("h-inPlaceFilter", ["restoreWarning", "hashly:inPlaceFilter", "verifyInPlace:./assets/alreadyBusted-hcc2b92966bfe56f10073f2fc8a69a9e2d.js", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceManifestTab", ["restoreWarning", "hashly:inPlaceManifestTab", "verifyInPlace:./assets/manifest.tab", "hashly:clean", "clean:manifestTab"]);
     grunt.registerTask("h-altDist", ["restoreWarning", "hashly:altDist", "verifyInPlace:./assetsDist/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css", "clean"]);
 
     grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExcludeJs", "h-inPlaceIncludeCss", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
