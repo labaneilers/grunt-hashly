@@ -1,6 +1,6 @@
 {
     "name": "grunt-hashly",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Renames static files with a hashcode for cache busting",
     "engines": {
         "node": ">=0.8.0"
