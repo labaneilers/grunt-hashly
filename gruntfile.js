@@ -111,17 +111,14 @@ module.exports = function (grunt) {
             if (ex.message.indexOf(expectedMessage) < 0) {
                 throw ex;
             }
-            console.log("Caught error: " + ex);
+            grunt.log.writeln("Caught error: " + ex);
         };
 
         grunt.fail.warn = report;
     });
 
     grunt.registerTask("restoreWarning", function () {
-        console.log("restoring warning...");
-
         grunt.fail.warn = function () {
-            console.log("Running original warn");
             origWarn.apply(this, arguments);
         };
     });
@@ -132,7 +129,6 @@ module.exports = function (grunt) {
             file = this.args[0];
         }
 
-        console.log("verifying...");
         if (!grunt.file.exists(file)) {
             throw new Error("Output file: " + file + " missing");
         }
@@ -148,5 +144,5 @@ module.exports = function (grunt) {
     grunt.registerTask("h-inPlaceFilter", ["restoreWarning", "hashly:inPlaceFilter", "verifyInPlace:./assets/alreadyBusted-hcc2b92966bfe56f10073f2fc8a69a9e2d.js", "hashly:clean"]);
     grunt.registerTask("h-altDist", ["restoreWarning", "hashly:altDist", "verifyInPlace:./assetsDist/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css", "clean"]);
 
-    grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
+    grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExcludeJs", "h-inPlaceIncludeCss", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
 };
