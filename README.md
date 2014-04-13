@@ -25,7 +25,7 @@ Task targets, files and options may be specified according to the grunt [Configu
 
 ### Options
 
-This task primarily delegates to [hashly](http://github.com/labaneilers/hashly), so please consider the documentation as required reading for advanced configuration.
+This task offers all the same options as the [hashly command line interface](http://github.com/labaneilers/hashly), so please refer to the documentation for advanced configuration.
 
 #### basePath
 Type: `String`  (required)
@@ -37,6 +37,17 @@ Type: `String`
 Default: `basePath`
 
 Optionally specify a target directory to which hashed files and the manifest should be copied. If not specified, files are hashed in-place.
+
+#### manifestFormat
+Type: `String`
+Default: `json`
+
+Optionally specify the format of the manifest file. Supports 'json' or 'tab'.
+
+#### exclude
+Type: `String`
+
+Optionally specify a comma-delimited list of globbing patterns to use to exclude files from being hashed/copied.
 
 ### Usage examples
 
@@ -53,4 +64,52 @@ grunt.initConfig({
     }
   }
 });
+
+#### Setting a targetPath
+
+This configuration will output all hashed files and the manifest in the specified target directory.
+
+```js
+// Project configuration.
+grunt.initConfig({
+  hashly: {
+    my_target: {
+      basePath: "./staticFiles",
+      targetPath: "./staticFilesProcessed"
+    }
+  }
+});
+
+#### Setting the manifest format to 'tab'
+
+This configuration will output all hashed files and the manifest in place, with the manifest in tab-delimited format.
+
+```js
+// Project configuration.
+grunt.initConfig({
+  hashly: {
+    my_target: {
+      basePath: "./staticFiles",
+      options: {
+        manifestFormat: "tab"
+      }
+    }
+  }
+});
 ```
+#### Setting an exclusion pattern
+
+This configuration will exclude any *.pdf files from being hashed.
+
+```js
+// Project configuration.
+grunt.initConfig({
+  hashly: {
+    my_target: {
+      basePath: "./staticFiles",
+      options: {
+        exclude: "*.pdf"
+      }
+    }
+  }
+});
