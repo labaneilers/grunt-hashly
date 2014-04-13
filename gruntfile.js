@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                 files: "./assets/**/*.js",
                 basePath: "./assets/"
             },
-            inPlaceClean: {
+            clean: {
                 basePath: "./assets/",
                 clean: true
             },
@@ -105,4 +105,50 @@ module.exports = function (grunt) {
     grunt.registerTask("default", ["jshint", "mochaTest"]);
 
     grunt.registerTask("beautify", ["jsbeautifier", "lineending"]);
+
+    var origWarn = grunt.fail.warn;
+
+    grunt.registerTask("setupExpectedError", function () {
+        var expectedMessage = this.args[0];
+
+        var report = function (ex) {
+            if (ex.message.indexOf(expectedMessage) < 0) {
+                throw ex;
+            }
+            console.log("Caught error: " + ex);
+        };
+
+        grunt.fail.warn = report;
+    });
+
+    grunt.registerTask("restoreWarning", function () {
+        console.log("restoring warning...");
+
+        grunt.fail.warn = function () {
+            console.log("Running original warn");
+            origWarn.apply(this, arguments);
+        };
+    });
+
+    grunt.registerTask("verifyInPlace", function () {
+        var file = "./assets/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css";
+        if (this.args.length > 0) {
+            file = this.args[0];
+        }
+
+        console.log("verifying...");
+        if (!grunt.file.exists(file)) {
+            throw new Error("Output file: " + file + " missing");
+        }
+    });
+
+    grunt.registerTask("h-basePathMissing", ["setupExpectedError:Config must specify 'basePath' property", "hashly:basePathMissing"]);
+    grunt.registerTask("h-basePathDoesntExist", ["setupExpectedError:assets-doesnt-exist doesn't exist", "hashly:basePathDoesntExist"]);
+    grunt.registerTask("h-basePathIsFile", ["setupExpectedError:alreadyBusted.css is not a directory", "hashly:basePathIsFile"]);
+    grunt.registerTask("h-inPlace", ["restoreWarning", "hashly:inPlace", "verifyInPlace", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceExplicit", ["restoreWarning", "hashly:inPlaceExplicit", "verifyInPlace", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceFilter", ["restoreWarning", "hashly:inPlaceFilter", "verifyInPlace:./assetsDist/alreadyBusted-hcc2b92966bfe56f10073f2fc8a69a9e2d.js", "hashly:clean"]);
+    grunt.registerTask("h-altDist", ["restoreWarning", "hashly:altDist", "verifyInPlace:./assetsDist/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css", "clean"]);
+
+    grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
 };
