@@ -55,10 +55,27 @@ module.exports = function (grunt) {
             }
         },
         hashly: {
-            inSource: {
+            basePathMissing: {},
+            basePathDoesntExist: {
+                basePath: "./assets-doesnt-exist"
+            },
+            basePathIsFile: {
+                basePath: "./assets/alreadyBusted.css"
+            },
+            inPlace: {
+                basePath: "./assets/"
+            },
+            inPlaceExplicit: {
                 files: "./assets/**/*",
+                basePath: "./assets/"
+            },
+            inPlaceFilter: {
+                files: "./assets/**/*",
+                basePath: "./assets/"
+            },
+            inPlaceClean: {
                 basePath: "./assets/",
-                targetPath: "./assets/"
+                clean: true
             },
             altDist: {
                 files: "./assets/**/*",

@@ -2,7 +2,6 @@
 
 //var chalk = require("chalk");
 var path = require("path");
-var fs = require("fs");
 
 module.exports = function (grunt) {
 
@@ -15,21 +14,45 @@ module.exports = function (grunt) {
             manifestFormat: "json",
             logger: grunt.verbose.writeln,
             logError: grunt.log.error,
-
         });
 
-        var files = grunt.file.expand(this.data.files)
-            .map(function (f) {
-                // Map full paths
-                return path.resolve(f);
-            })
-            .filter(function (f) {
-                // Include only files, not directories
-                return fs.lstatSync(f).isFile();
-            });
+        if (!this.data.basePath) {
+            throw new Error("Config must specify 'basePath' property.");
+        }
 
         var basePath = path.resolve(this.data.basePath);
-        var targetPath = path.resolve(this.data.targetPath);
+        var targetPath = path.resolve(this.data.targetPath || this.data.basePath);
+
+        if (!grunt.file.exists(basePath)) {
+            throw new Error("basePath: " + basePath + " doesn't exist.");
+        }
+
+        if (!grunt.file.isDir(basePath)) {
+            throw new Error("basePath: " + basePath + " is not a directory.");
+        }
+
+        var files;
+        if (this.data.files) {
+            grunt.file.expand(this.data.files)
+                .map(function (f) {
+                    // Map full paths
+                    return path.resolve(f);
+                })
+                .filter(function (f) {
+                    // Include only files, not directories
+                    return grunt.file.isFile(f);
+                });
+        } else {
+            var files = [];
+            grunt.file.recurse(basePath, function (f) {
+                files.push(f);
+            })
+        }
+
+        if (this.data.clean) {
+            hashly.clean(basePath, options);
+            return;
+        }
 
         hashly.processFiles(files, basePath, targetPath, options);
     });
