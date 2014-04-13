@@ -65,6 +65,18 @@ module.exports = function (grunt) {
             inPlace: {
                 basePath: "./assets/"
             },
+            inPlaceExcludeJs: {
+                basePath: "./assets/",
+                options: {
+                    exclude: "*.js"
+                }
+            },
+            inPlaceIncludeCss: {
+                basePath: "./assets/",
+                options: {
+                    include: "*.css"
+                }
+            },
             inPlaceExplicit: {
                 files: "./assets/**/*",
                 basePath: "./assets/"
@@ -105,6 +117,8 @@ module.exports = function (grunt) {
     grunt.registerTask("default", ["jshint", "mochaTest"]);
 
     grunt.registerTask("beautify", ["jsbeautifier", "lineending"]);
+
+    grunt.registerTask("cleanall", ["hashly:clean", "clean"]);
 
     var origWarn = grunt.fail.warn;
 
@@ -147,7 +161,9 @@ module.exports = function (grunt) {
     grunt.registerTask("h-basePathIsFile", ["setupExpectedError:alreadyBusted.css is not a directory", "hashly:basePathIsFile"]);
     grunt.registerTask("h-inPlace", ["restoreWarning", "hashly:inPlace", "verifyInPlace", "hashly:clean"]);
     grunt.registerTask("h-inPlaceExplicit", ["restoreWarning", "hashly:inPlaceExplicit", "verifyInPlace", "hashly:clean"]);
-    grunt.registerTask("h-inPlaceFilter", ["restoreWarning", "hashly:inPlaceFilter", "verifyInPlace:./assetsDist/alreadyBusted-hcc2b92966bfe56f10073f2fc8a69a9e2d.js", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceExcludeJs", ["restoreWarning", "hashly:inPlaceExcludeJs", "verifyInPlace", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceIncludeCss", ["restoreWarning", "hashly:inPlaceIncludeCss", "verifyInPlace", "hashly:clean"]);
+    grunt.registerTask("h-inPlaceFilter", ["restoreWarning", "hashly:inPlaceFilter", "verifyInPlace:./assets/alreadyBusted-hcc2b92966bfe56f10073f2fc8a69a9e2d.js", "hashly:clean"]);
     grunt.registerTask("h-altDist", ["restoreWarning", "hashly:altDist", "verifyInPlace:./assetsDist/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css", "clean"]);
 
     grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
