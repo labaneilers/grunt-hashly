@@ -1,56 +1,36 @@
 "use strict";
 
-var chalk = require("chalk");
+//var chalk = require("chalk");
+var path = require("path");
+var fs = require("fs");
 
 module.exports = function (grunt) {
 
-    grunt.log.writeln("heay");
-
-    var hashly = require("hashly");
-
-    grunt.log.writeln("heay2");
-
     grunt.registerMultiTask("hashly", "Cache bust with hashly.", function () {
+
+        var hashly = require("hashly");
+
         // Merge task-specific and/or target-specific options with these defaults.
         var options = this.options({
             manifestFormat: "json",
-            logger: grunt.log.writeln
+            logger: grunt.verbose.writeln,
+            logError: grunt.log.error,
+
         });
 
-        // Iterate over all src-dest file pairs.
-        this.files.forEach(function (f) {
-            var src = f.src.filter(function (filepath) {
-                // Warn on and remove invalid source files (if nonull was set).
-                if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn("Source file " + chalk.cyan(filepath) + " not found.");
-                    return false;
-                } else {
-                    return true;
-                }
+        var files = grunt.file.expand(this.data.files)
+            .map(function (f) {
+                // Map full paths
+                return path.resolve(f);
+            })
+            .filter(function (f) {
+                // Include only files, not directories
+                return fs.lstatSync(f).isFile();
             });
 
-            // Minify files, warn and fail on error.
-            var result;
-            try {
-                result = hashly.process(src, f.dest, options);
-            } catch (e) {
-                console.log(e);
-                var err = new Error("Hashly failed.");
-                if (e.message) {
-                    err.message += "\n" + e.message + ". \n";
-                    if (e.line) {
-                        err.message += "Line " + e.line + " in " + src + "\n";
-                    }
-                }
-                err.origError = e;
-                grunt.log.warn("Hashly " + chalk.cyan(src) + " failed.");
-                grunt.fail.warn(err);
-            }
+        var basePath = path.resolve(this.data.basePath);
+        var targetPath = path.resolve(this.data.targetPath);
 
-            // Write the destination file.
-            grunt.file.write(f.dest, result);
-
-            grunt.log.writeln("File " + chalk.cyan(f.dest) + " created: ");
-        });
+        hashly.processFiles(files, basePath, targetPath, options);
     });
 };

@@ -55,9 +55,15 @@ module.exports = function (grunt) {
             }
         },
         hashly: {
-            all: {
-                files: "./assets2/**/*",
-                basePath: "./assets2/"
+            inSource: {
+                files: "./assets/**/*",
+                basePath: "./assets/",
+                targetPath: "./assets/"
+            },
+            altDist: {
+                files: "./assets/**/*",
+                basePath: "./assets/",
+                targetPath: "./assetsDist/"
             }
         }
     };
