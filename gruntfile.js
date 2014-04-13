@@ -82,6 +82,9 @@ module.exports = function (grunt) {
                 basePath: "./assets/",
                 targetPath: "./assetsDist/"
             }
+        },
+        clean: {
+            assetsDist: ["./assetsDist/"]
         }
     };
 
@@ -93,6 +96,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-mocha-test");
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-lineending");
+    grunt.loadNpmTasks("grunt-contrib-clean");
 
     grunt.loadTasks("./tasks/");
 
