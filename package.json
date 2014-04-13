@@ -1,6 +1,6 @@
 {
     "name": "grunt-hashly",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Renames static files with a hashcode for cache busting",
     "engines": {
         "node": ">=0.8.0"
@@ -18,10 +18,6 @@
         "grunt-mocha-test": "~0.10.0",
         "mocha": "~1.18.2",
         "rewire": "~2.0.0"
-    },
-    "main": "./lib/hashly",
-    "bin": {
-        "hashly": "./bin/hashly"
     },
     "repository": {
         "type": "git",
