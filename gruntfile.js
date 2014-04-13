@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                 basePath: "./assets/"
             },
             inPlaceFilter: {
-                files: "./assets/**/*",
+                files: "./assets/**/*.js",
                 basePath: "./assets/"
             },
             inPlaceClean: {

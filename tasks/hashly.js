@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 
         var files;
         if (this.data.files) {
-            grunt.file.expand(this.data.files)
+            files = grunt.file.expand(this.data.files)
                 .map(function (f) {
                     // Map full paths
                     return path.resolve(f);
@@ -43,10 +43,10 @@ module.exports = function (grunt) {
                     return grunt.file.isFile(f);
                 });
         } else {
-            var files = [];
+            files = [];
             grunt.file.recurse(basePath, function (f) {
                 files.push(f);
-            })
+            });
         }
 
         if (this.data.clean) {
