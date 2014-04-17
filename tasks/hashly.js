@@ -23,6 +23,9 @@ module.exports = function (grunt) {
         var basePath = path.resolve(this.data.basePath);
         var targetPath = path.resolve(this.data.targetPath || this.data.basePath);
 
+        console.log("original: " + this.data.basePath);
+        console.log("resolved:" + basePath);
+
         if (!grunt.file.exists(basePath)) {
             throw new Error("basePath: " + basePath + " doesn't exist.");
         }
@@ -45,7 +48,7 @@ module.exports = function (grunt) {
         } else {
             files = [];
             grunt.file.recurse(basePath, function (f) {
-                files.push(f);
+                files.push(path.resolve(f));
             });
         }
 
