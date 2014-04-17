@@ -48,6 +48,9 @@ module.exports = function (grunt) {
         } else {
             files = [];
             grunt.file.recurse(basePath, function (f) {
+                // Calling path.resolve() is a fix for grunt issue:
+                // https://github.com/gruntjs/grunt/issues/1117
+                // Corrects file separators on windows.
                 files.push(path.resolve(f));
             });
         }
