@@ -49,6 +49,11 @@ Type: `String`
 
 Optionally specify a comma-delimited list of globbing patterns to use to exclude files from being hashed/copied.
 
+#### include
+Type: `String`
+
+Optionally specify a comma-delimited list of globbing patterns to use to include files to be hashed/copied.
+
 ### Usage examples
 
 #### Basic usage
