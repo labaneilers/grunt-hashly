@@ -103,7 +103,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("travis", "default");
 
-    grunt.registerTask("default", ["jshint", "test"]);
+    grunt.registerTask("default", ["jshint"]);
 
     grunt.registerTask("beautify", ["jsbeautifier", "lineending"]);
 

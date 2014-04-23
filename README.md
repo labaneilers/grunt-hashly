@@ -1,4 +1,4 @@
-grunt-hashly
+grunt-hashly [![Build Status](https://secure.travis-ci.org/labaneilers/grunt-hashly.png?branch=master)](http://travis-ci.org/labaneilers/grunt-hashly)
 ======
 
 grunt-hashly is a [grunt](http://gruntjs.com) binding for [hashly](https://github.com/labaneilers/hashly), which is a build-time tool that enables cache-busting for static files (images, JavaScript, CSS, etc). 
