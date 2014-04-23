@@ -1,38 +1,40 @@
 {
-    "name": "grunt-hashly",
-    "version": "0.1.2",
-    "description": "Renames static files with a hashcode for cache busting",
-    "engines": {
-        "node": ">=0.8.0"
-    },
-    "dependencies": {
-        "hashly": "~0.1.8"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.0",
-        "grunt-contrib-clean": "^0.5.0",
-        "grunt-contrib-jshint": "~0.9.2",
-        "grunt-jsbeautifier": "~0.2.6",
-        "grunt-lineending": "~0.2.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/labaneilers/grunt-hashly.git"
-    },
-    "bugs": {
-        "url": "https://github.com/labaneilers/grunt-hashly/issues"
-    },
-    "keywords": [
-        "javascript",
-        "gruntplugin"
-    ],
-    "author": {
-        "name": "Laban Eilers",
-        "email": "laban@eilers.com",
-        "url": "http://www.labaneilers.com"
-    },
-    "contributors": [{
-        "name": "Laban Eilers"
-    }],
-    "license": "Apache 2"
+  "name": "grunt-hashly",
+  "version": "0.1.2",
+  "description": "Renames static files with a hashcode for cache busting",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "hashly": "~0.1.8"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jsbeautifier": "^0.2.7",
+    "grunt-lineending": "^0.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/labaneilers/grunt-hashly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/labaneilers/grunt-hashly/issues"
+  },
+  "keywords": [
+    "javascript",
+    "gruntplugin"
+  ],
+  "author": {
+    "name": "Laban Eilers",
+    "email": "laban@eilers.com",
+    "url": "http://www.labaneilers.com"
+  },
+  "contributors": [
+    {
+      "name": "Laban Eilers"
+    }
+  ],
+  "license": "Apache 2"
 }
