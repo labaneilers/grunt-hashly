@@ -44,6 +44,13 @@ Default: `json`
 
 Optionally specify the format of the manifest file. Supports 'json' or 'tab'.
 
+#### processCss
+Type: `Boolean`
+Default: `false`
+
+If true, image paths in CSS files are rewritten to point to the hashed versions of the images. This ensures that when images change,
+the url of the CSS that references them also changes.
+
 #### exclude
 Type: `String`
 
