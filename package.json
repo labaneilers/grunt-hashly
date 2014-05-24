@@ -6,7 +6,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "hashly": "~0.2.0"
+    "hashly": "~0.2.3"
   },
   "devDependencies": {
     "grunt": "0.4.4",
@@ -24,7 +24,12 @@
   },
   "keywords": [
     "javascript",
-    "gruntplugin"
+    "gruntplugin",
+    "cache",
+    "cache busting",
+    "hashcode",
+    "deployment",
+    "CDN"
   ],
   "author": {
     "name": "Laban Eilers",

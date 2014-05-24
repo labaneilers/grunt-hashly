@@ -44,6 +44,12 @@ Default: `json`
 
 Optionally specify the format of the manifest file. Supports 'json' or 'tab'.
 
+#### manifestPath
+Type: `String`
+Default: `json`
+
+Specifies a path for the manifest file. If not specified, the manifest is named "manifest.{ext}" and is placed in the destination directory root.
+
 #### processCss
 Type: `Boolean`
 Default: `false`
