@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
         var files;
         if (this.data.files) {
-            files = grunt.file.expand(this.data.files)
+            files = grunt.file.expand(this.data.files, this.data.files.src)
                 .map(function (f) {
                     // Map full paths
                     return path.resolve(f);
