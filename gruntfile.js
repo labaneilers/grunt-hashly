@@ -9,34 +9,6 @@ module.exports = function (grunt) {
                 jshintrc: ".jshintrc"
             }
         },
-        jsbeautifier: {
-            all: {
-                src: ["gruntfile.js", "./lib/**/*.js", "./test/**/*.js"],
-                options: {
-                    js: {
-                        jslintHappy: true
-                    }
-                }
-            }
-        },
-        lineending: {
-            all: {
-                files: [{
-                    expand: true,
-                    cwd: "./lib/",
-                    src: ["./**/*.js"],
-                    dest: "./lib/"
-                }, {
-                    expand: true,
-                    cwd: "./test/",
-                    src: ["./**/*.js"],
-                    dest: "./test/"
-                }],
-                options: {
-                    eol: "crlf"
-                }
-            }
-        },
         hashly: {
             basePathMissing: {},
             basePathDoesntExist: {
@@ -95,8 +67,6 @@ module.exports = function (grunt) {
 
     // NPM tasks
     grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-jsbeautifier");
-    grunt.loadNpmTasks("grunt-lineending");
     grunt.loadNpmTasks("grunt-contrib-clean");
 
     grunt.loadTasks("./tasks/");
@@ -152,5 +122,7 @@ module.exports = function (grunt) {
     grunt.registerTask("h-inPlaceManifestTab", ["restoreWarning", "hashly:inPlaceManifestTab", "verifyInPlace:./assets/manifest.tab", "hashly:clean", "clean:manifestTab"]);
     grunt.registerTask("h-altDist", ["restoreWarning", "hashly:altDist", "verifyInPlace:./assetsDist/alreadyBusted-hc3a2235f433dd3f09b20af8e3f773ee6c.css", "clean"]);
 
-    grunt.registerTask("test", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExcludeJs", "h-inPlaceIncludeCss", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
+    grunt.registerTask("default", ["h-basePathMissing", "h-basePathDoesntExist", "h-basePathIsFile", "h-inPlace", "h-inPlaceExcludeJs", "h-inPlaceIncludeCss", "h-inPlaceExplicit", "h-inPlaceFilter", "h-altDist"]);
+
+    grunt.registerTask("travis", ["default"]);
 };
