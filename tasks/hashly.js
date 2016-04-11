@@ -36,7 +36,9 @@ module.exports = function (grunt) {
 
         var files;
         if (this.data.files) {
-            files = grunt.file.expand(this.data.files, this.data.files.src)
+            // if files is a string - expand the glob, if it is an object then pass src to expand
+            var all_files = (typeof this.data.files === "string") ? grunt.file.expand(this.data.files) : grunt.file.expand(this.data.files, this.data.files.src);
+            files = all_files
                 .map(function (f) {
                     // Map full paths
                     return path.resolve(f);
@@ -45,6 +47,7 @@ module.exports = function (grunt) {
                     // Include only files, not directories
                     return grunt.file.isFile(f);
                 });
+
         } else {
             files = [];
             grunt.file.recurse(basePath, function (f) {
